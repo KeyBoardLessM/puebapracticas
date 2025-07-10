@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from 'react';
 
  function Titlemkr({showtext,tsize,color1,fontT}){
 
@@ -80,6 +81,29 @@ return(
 
 }
 
+
+export function BotonContador(){
+
+const [contador,Actualizarcontador]=useState(0);
+
+function DetectarClick(){
+
+      Actualizarcontador(contador++)  
+}
+
+  return(
+<button  onClick={DetectarClick} >
+      Has hecho funcionar el botón {contador} veces
+</button>
+
+
+  )
+}
+
+
+
+
+
 export default function Home() {
   
     return( 
@@ -94,6 +118,8 @@ export default function Home() {
 <Paragraphmkr ptext="Mi bionicle favorito es Vakama, este no es vakama, pero se ve genial y mefuncionó la imagen" colorp="color-[#b259b8]" sizep="text-[20px]" fontp="font-sans"    />
 
 <Imagesmkr imglink= "https://tse1.mm.bing.net/th/id/OIP.KcFmFpk8jxRWVyKWgOkNPQHaHi?rs=1&pid=ImgDetMain&o=7&rm=3 " hlength="h-50" Wlength="w-50"/>
+     
+     <BotonContador/>
       </div>
       
    </main>
