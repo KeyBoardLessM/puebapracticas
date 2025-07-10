@@ -88,7 +88,7 @@ const [contador,Actualizarcontador]=useState(0);
 
 function DetectarClick(){
 
-      Actualizarcontador(contador++)  
+      Actualizarcontador(contador=contador+1)  
 }
 
   return(
