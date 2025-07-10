@@ -84,7 +84,7 @@ return(
 
 export function BotonContador(){
 
-const [contador,Actualizarcontador]=useState(0);
+var [contador,Actualizarcontador]=useState(0);
 
 function DetectarClick(){
 
