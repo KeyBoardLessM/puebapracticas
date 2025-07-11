@@ -33,7 +33,7 @@ f
 
 }
 
-export default function MainPage(){
+export  function MainPage(){
 
    
 
