@@ -1,0 +1,122 @@
+{
+  "Register1": {
+    "IDentifier": 1,
+    "honorario": "Turaga",
+    "nombre": "Vakama",
+    "imagelink": "https://tse1.mm.bing.net/th/id/OIP.eoLRDH4QEuh-fTMWEMxQ8QAAAA?w=472&h=401&rs=1&pid=ImgDetMain&o=7&rm=3"
+  },
+  "Register2": {
+    "IDentifier": 2,
+    "honorario": "Turaga",
+    "nombre": "Nokama",
+    "imagelink": "https://vignette.wikia.nocookie.net/pl.bionicle/images/b/b4/Turaga_Nokama_Set.PNG/revision/latest?cb=20141102130246"
+  },
+  "Register3": {
+    "IDentifier": 3,
+    "honorario": "Toa",
+    "nombre": "Tahu",
+    "imagelink": "https://tse2.mm.bing.net/th/id/OIP.idgJxhXHBg59ylGg1R1l4wHaJa?rs=1&pid=ImgDetMain&o=7&rm=3"
+  },
+  "Register4": {
+    "IDentifier": 4,
+    "honorario": "Toa",
+    "nombre": "Kopaka",
+    "imagelink": "https://cdn.rebrickable.com/media/thumbs/mocs/moc-123056.jpg/1000x800.jpg?1663090027.614451"
+  },
+  "Register5": {
+    "IDentifier": 5,
+    "honorario": "Toa",
+    "nombre": "Ghali",
+    "imagelink": "https://www.brickeconomy.com/resources/images/sets/lego-8533-1_xlarge.jpg"
+  },
+  "Register6": {
+    "IDentifier": 6,
+    "honorario": "Toa",
+    "nombre": "Onua",
+    "imagelink": "https://tse3.mm.bing.net/th/id/OIP.1rSZ9yJ7qvlLhX3XNLOD3QHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+  },
+  "Register7": {
+    "IDentifier": 7,
+    "honorario": "Toa",
+    "nombre": "Lewa",
+    "imagelink": "https://tse4.mm.bing.net/th/id/OIP.NplQdaIPzf5eY9gXFOv9xQHaHo?rs=1&pid=ImgDetMain&o=7&rm=3"
+  },
+  "Register8": {
+    "IDentifier": 8,
+    "honorario": "Toa",
+    "nombre": "Pohatu",
+    "imagelink": "https://tse4.mm.bing.net/th/id/OIP.ywVYqiDBKUG98m8p4hAIgAHaJ4?rs=1&pid=ImgDetMain&o=7&rm=3"
+  },
+  "Register9": {
+    "IDentifier": 9,
+    "honorario": "Matoran",
+    "nombre": "Jaller",
+    "imagelink": "https://tse3.mm.bing.net/th/id/OIP.61v4K8YITHibQpMGgp8EJQHaG1?rs=1&pid=ImgDetMain&o=7&rm=3"
+  },
+  "Register10": {
+    "IDentifier": 10,
+    "honorario": "Matoran",
+    "nombre": "Hahli",
+    "imagelink": "https://art.ngfiles.com/images/3459000/3459833_rustybox_hahli-cwc23.png?f1694788696"
+  },
+  "Register11": {
+    "IDentifier": 11,
+    "honorario": "Toa",
+    "nombre": "Takanuva",
+    "imagelink": "https://tse1.mm.bing.net/th/id/OIP.msVNPsPYl8PU0z4TKSC8UAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+  },
+  "Register12": {
+    "IDentifier": 12,
+    "honorario": "Makuta",
+    "nombre": "Teridax",
+    "imagelink": "https://tse3.mm.bing.net/th/id/OIP.XaQUkL1UBvPHMAUU72zV_QHaDt?rs=1&pid=ImgDetMain&o=7&rm=3"
+  },
+  "Register13": {
+    "IDentifier": 13,
+    "honorario": "Toa",
+    "nombre": "Lhikan",
+    "imagelink": "https://tse1.mm.bing.net/th/id/OIP.3uPzxOkZAtiJUUvI1RCPpwHaKb?rs=1&pid=ImgDetMain&o=7&rm=3"
+  },
+  "Register14": {
+    "IDentifier": 14,
+    "honorario": "Turaga",
+    "nombre": "Dume",
+    "imagelink": "https://www.chronistwiki.de/w/images/thumb/0/04/LoMN_Dume.jpg/375px-LoMN_Dume.jpg"
+  },
+  "Register15": {
+    "IDentifier": 15,
+    "honorario": "Toa",
+    "nombre": "Nuju",
+    "imagelink": "https://www.figurerealm.com/galleries/bionicle/ToaNuju-8606.jpg"
+  },
+  "Register16": {
+    "IDentifier": 16,
+    "honorario": "Toa",
+    "nombre": "Whenua",
+    "imagelink": "https://tse2.mm.bing.net/th/id/OIP.LnOHXDJt0drs7iy3dWedTQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3"
+  },
+  "Register17": {
+    "IDentifier": 17,
+    "honorario": "Toa",
+    "nombre": "Onewa",
+    "imagelink": "https://mymikesite.weebly.com/uploads/4/1/9/9/4199804/3339226.png?433"
+  },
+  "Register18": {
+    "IDentifier": 18,
+    "honorario": "Toa",
+    "nombre": "Matau",
+    "imagelink": "https://biomediaproject.com/bmp/wp-content/uploads/2021/03/8605_002-1024x786.png"
+  },
+  "Register19": {
+    "IDentifier": 19,
+    "honorario": "Toa",
+    "nombre": "Nokama",
+    "imagelink": "https://i.etsystatic.com/37332217/r/il/8a545a/5146819314/il_fullxfull.5146819314_3wnb.jpg"
+  },
+  "Register20": {
+    "IDentifier": 20,
+    "honorario": "Toa",
+    "nombre": "Vakama",
+    "imagelink": "https://tse1.mm.bing.net/th/id/OIP.LL1Qrrqj5uAupoHmcxpKWwHaMO?rs=1&pid=ImgDetMain&o=7&rm=3"
+  }
+}
