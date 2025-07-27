@@ -4,6 +4,7 @@ import Reacstrapcomponents, {
   BotonModal,
   BotonTostada,
   MyForm,
+  NewestForm,
 } from "./Reacstrapcomponents.js";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -11,9 +12,9 @@ import "react-multi-carousel/lib/styles.css";
 export default function Home() {
   return (
     <main>
-      <MyForm />
-
-      <div></div>
+      <div>
+        <NewestForm></NewestForm>
+      </div>
     </main>
   );
 }

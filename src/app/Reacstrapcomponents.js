@@ -1,6 +1,6 @@
 "Use Client";
 
-import React from "react";
+import React, { use } from "react";
 import { useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,6 +13,8 @@ import {
   ModalBody,
   Button,
   Table,
+  Input,
+  FormGroup,
 } from "reactstrap";
 
 import "react-multi-carousel/lib/styles.css";
@@ -27,6 +29,237 @@ import oldpage, { Titlemkr } from "./oldpage";
 //import { readFile, writeFile } from "fs/promises";
 
 //import Registros from "./Registros.json";
+
+export function NewestForm({}) {
+  var [FormData, UpdateData] = useState({
+    Name: "",
+    LastNames: "",
+    Mail: "",
+    Password: "",
+    Age: 0,
+    isMale: false,
+    Role: "",
+    Options: "",
+    Notes: "",
+    Date: "",
+  });
+  var valuest;
+  var comparedata = (e) => {
+    const { name, value, type, checked } = e.target;
+    /*
+    if (type === "checkbox") {
+      // para opciones múltiples
+      setFormData((prev) => {
+        if (checked) {
+          return { ...prev, options: [...prev.options, value] };
+        } else {
+          return {
+            ...prev,
+            options: prev.options.filter((opt) => opt !== value),
+          };
+        }
+      });
+    } else if (type === "radio") {
+      setFormData((prev) => ({ ...prev, isMale: value === "true" }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }*/
+
+    if (e.target.name == "Name") {
+      FormData.Name = e.target.value;
+    }
+    if (e.target.name == "LastNames") {
+      FormData.LastNames = e.target.value;
+    }
+    if (e.target.name == "Mail") {
+      FormData.Mail = e.target.value;
+    }
+    if (e.target.name == "Password") {
+      FormData.Password = e.target.value;
+    }
+    if (e.target.name == "Age") {
+      FormData.Age = e.target.value;
+    }
+    if (e.target.name == "isMale") {
+      FormData.isMale = e.target.value;
+    }
+    if (e.target.name == "Role") {
+      FormData.Role = e.target.value;
+    }
+    if (e.target.name == "Options") {
+      FormData.Options = FormData.Options + e.target.value;
+    }
+    if (e.target.name == "Notes") {
+      FormData.Notes = e.target.value;
+    }
+    if (e.target.name == "Date") {
+      FormData.Date = e.target.value;
+    }
+  };
+
+  function SaveFormData({}) {}
+  function ShowFormData({}) {}
+  function clearFormData() {
+    window.location.reload(true);
+  }
+
+  return (
+    <div>
+      <Titlemkr
+        showtext="Formulario de registro"
+        tsize="text-[40px]"
+        color1="text-gray-600"
+        fontT="font-bold"
+      />
+      <div className="text-[20px] text-[#54480b] font-extrabold">
+        Nombre
+        <Input
+          name="Name"
+          placeholder="pon tu nombre aquí"
+          onChange={comparedata}
+        />
+      </div>
+      <div className="text-[20px] text-[#54480b] font-extrabold">
+        Apellidos
+        <Input
+          placeholder="ingresa tus apellidos aqui"
+          name="LastNames"
+          onChange={comparedata}
+        />
+      </div>
+      <div className="text-[20px] text-[#54480b] font-extrabold">
+        Correo
+        <Input
+          type="email"
+          placeholder="ingresa tu correo aqui"
+          name="Mail"
+          onChange={comparedata}
+        />
+      </div>
+      <div className="text-[20px] text-[#54480b] font-extrabold">
+        Contraseña
+        <Input
+          type="password"
+          placeholder="****"
+          name="Password"
+          onChange={comparedata}
+        />
+      </div>
+      <div className="text-[20px] text-[#54480b] font-extrabold">
+        Edad
+        <Input
+          type="number"
+          placeholder="00"
+          name="Age"
+          onChange={comparedata}
+        />
+      </div>
+      <div className="text-[20px] text-[#54480b] font-extrabold">
+        Género
+        <FormGroup tag="fieldset">
+          <FormGroup check>
+            Masculino
+            <Input
+              type="radio"
+              name="isMale"
+              value="true"
+              onChange={comparedata}
+            ></Input>
+          </FormGroup>
+          <FormGroup check>
+            Femenino
+            <Input
+              type="radio"
+              name="isMale"
+              value="false"
+              onChange={comparedata}
+            ></Input>
+          </FormGroup>
+        </FormGroup>
+      </div>
+      <div className="text-[20px] text-[#54480b] font-extrabold">
+        Rol?
+        <Input type="select" name="Role" onChange={comparedata}>
+          <option> no se a que se refiere con rol</option>
+          <option> si se a que se refiere con rol</option>
+          <option> no entiendo a que se refiere con rol</option>
+        </Input>
+      </div>
+      <div className="text-[20px] text-[#54480b] font-extrabold">
+        Opciones
+        <FormGroup>
+          <Input
+            type="checkbox"
+            name="Options"
+            onChange={comparedata}
+            value="op1"
+          />
+          <label>opción 1</label>
+          <Input
+            type="checkbox"
+            name="Options"
+            onChange={comparedata}
+            value="op2"
+          />
+          <label>opción uno</label>
+          <Input
+            type="checkbox"
+            name="Options"
+            onChange={comparedata}
+            value="op3"
+          />
+          <label>opción one</label>
+          <Input
+            type="checkbox"
+            name="Options"
+            onChange={comparedata}
+            value="op4"
+          />
+          <label>opción um</label>
+          <Input
+            type="checkbox"
+            name="Options"
+            onChange={comparedata}
+            value="op5"
+          />
+          <label>opción unu</label>
+          <Input
+            type="checkbox"
+            name="Options"
+            onChange={comparedata}
+            value="op6"
+          />
+          <label>opción eins</label>
+          <Input
+            type="checkbox"
+            name="Options"
+            onChange={comparedata}
+            value="op7"
+          />
+          <label>opción un</label>
+          <Input
+            type="checkbox"
+            name="Options"
+            onChange={comparedata}
+            value="op8"
+          />
+          <label>opción unus</label>
+        </FormGroup>
+      </div>
+      <div className="text-[20px] text-[#54480b] font-extrabold">
+        Notas / Observaciones
+        <Input type="textarea" name="Notes" onChange={comparedata} />
+      </div>
+      <div className="text-[20px] text-[#54480b] font-extrabold">
+        Fecha
+        <Input type="date" name="Date" onChange={comparedata} />
+      </div>
+      <div className="buttons"></div>
+      <BotonShowForm FormStructData={FormData}></BotonShowForm>
+      <Button onClick={clearFormData}>Reiniciar Formulario</Button>
+    </div>
+  );
+}
 
 export function MyForm() {
   /*
@@ -342,32 +575,7 @@ const responsive = {
 };
 
 
-// supuesta mente esto debería hacer flechas  propias, pero  no encuentra los icónos
-const CustomRightArrow = ({ onClick, ...rest }) => {
-  const {
-    onMove,
-    carouselState: { currentSlide, deviceType },
-  } = rest
-  // onMove means if dragging or swiping in progress.
-  return (
-    <button className="custom-arrow custom-arrow-right bg-green-500" onClick={() => onClick()}>
-      {'>'}
-    </button>
-  )
-}
 
-const CustomLeftArrow = ({ onClick, ...rest }) => {
-  const {
-    onMove,
-    carouselState: { currentSlide, deviceType },
-  } = rest
-  return (
-    <button className="custom-arrow custom-arrow-left bg-green-500" onClick={() => onClick()}>
-      {'<'}
-    </button>
-  )
-}
-  // aqui termina las flecas propias
 
 
 
@@ -408,12 +616,86 @@ const CustomLeftArrow = ({ onClick, ...rest }) => {
 </Carousel>
 
 
+// supuesta mente esto debería hacer flechas  propias, pero  no encuentra los icónos
+const CustomRightArrow = ({ onClick, ...rest }) => {
+  const {
+    onMove,
+    carouselState: { currentSlide, deviceType },
+  } = rest
+  // onMove means if dragging or swiping in progress.
+  return (
+    <button className="custom-arrow custom-arrow-right bg-green-500" onClick={() => onClick()}>
+      {'>'}
+    </button>
+  )
+}
 
+const CustomLeftArrow = ({ onClick, ...rest }) => {
+  const {
+    onMove,
+    carouselState: { currentSlide, deviceType },
+  } = rest
+  return (
+    <button className="custom-arrow custom-arrow-left bg-green-500" onClick={() => onClick()}>
+      {'<'}
+    </button>
+  )
+}
+  // aqui termina las flecas propias
 
 
 
 
 */
+
+export function BotonShowForm({ FormStructData }) {
+  var [contadorB, ActualizarBool] = useState(false);
+
+  function DetectarClick() {
+    ActualizarBool((contadorB = !contadorB));
+  }
+
+  var showdata = JSON.stringify(FormStructData);
+  if (contadorB) {
+    return (
+      <div>
+        <div
+          style={{
+            display: "block",
+            width: 700,
+            padding: 30,
+            backgroundColor: "blue",
+          }}
+        >
+          <Modal
+            isOpen={contadorB}
+            modalTransition={{ timeout: 2000 }}
+            className="bg-blue-200"
+          >
+            <ModalBody className="bg-blue-300">{showdata}</ModalBody>
+            <ModalFooter className="bg-[#494bca]">
+              <button onClick={DetectarClick} className="bg-[#22979d]">
+                Cerrar modal
+              </button>
+            </ModalFooter>
+          </Modal>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Button onClick={DetectarClick} className="bg-[#565cd5] ">
+          Mostrar Datos
+          <FontAwesomeIcon
+            icon={faArrowRight}
+            className="text-[#013680] "
+          ></FontAwesomeIcon>
+        </Button>{" "}
+      </div>
+    );
+  }
+}
 
 export function BotonModal({ imglink }) {
   var [contadorB, ActualizarBool] = useState(false);
