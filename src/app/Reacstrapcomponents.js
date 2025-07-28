@@ -15,6 +15,8 @@ import {
   Table,
   Input,
   FormGroup,
+  FormFeedback,
+  Form,
 } from "reactstrap";
 
 import "react-multi-carousel/lib/styles.css";
@@ -43,9 +45,23 @@ export function NewestForm({}) {
     Notes: "",
     Date: "",
   });
-  var valuest;
+
+  var [Validinput, UpdateValid] = useState({
+    Name: null,
+    LastNames: null,
+    Mail: null,
+    Password: null,
+    Age: null,
+    isMale: null,
+    Role: null,
+    Options: null,
+    Notes: null,
+    Date: null,
+  });
+
   var comparedata = (e) => {
     const { name, value, type, checked } = e.target;
+
     /*
     if (type === "checkbox") {
       // para opciones múltiples
@@ -64,13 +80,30 @@ export function NewestForm({}) {
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }*/
+    /*
+    if (
+      e.target.name == "Name" &&
+      /^[A-Za-z]+$/.test(e.target.value) &&
+      String(e.target.value).length > 0
+    ) {
+      UpdateData({ FormData, Name: e.target.value });
 
-    if (e.target.name == "Name") {
-      FormData.Name = e.target.value;
+      UpdateValid({ Validinput, Name: true });
+    } else {
+      UpdateValid({ Validinput, Name: false });
     }
-    if (e.target.name == "LastNames") {
+
+    if (
+      e.target.name == "LastNames" &&
+      /^[A-Za-z]+$/.test(e.target.value) &&
+      String(e.target.value).length > 0
+    ) {
       FormData.LastNames = e.target.value;
+      UpdateValid({ Validinput, LastNames: true });
+    } else {
+      UpdateValid({ Validinput, LastNames: false });
     }
+
     if (e.target.name == "Mail") {
       FormData.Mail = e.target.value;
     }
@@ -95,168 +128,266 @@ export function NewestForm({}) {
     if (e.target.name == "Date") {
       FormData.Date = e.target.value;
     }
+*/
+
+    if (name === "Name" || name === "LastNames") {
+      const ValidatedStrings = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s'-]+$/.test(value.trim());
+      UpdateValid((prev) => ({
+        ...prev,
+        [name]: ValidatedStrings,
+      }));
+      if (ValidatedStrings === true) {
+        UpdateData((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+      }
+    }
+
+    if (name === "Mail") {
+      const validMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+      UpdateValid((prev) => ({
+        ...prev,
+        [name]: validMail,
+      }));
+      if (ValidatedMail === true) {
+        UpdateData((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+      }
+    }
+
+    if (name === "Age") {
+      const validAge = /^(?:[1-9]|[1-9][0-9]|1[0-2][0-9])$/.test(value.trim());
+      UpdateValid((prev) => ({
+        ...prev,
+        [name]: validAge,
+      }));
+      if (validAge === true) {
+        UpdateData((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+      }
+    }
+    if (name === "Date") {
+      const today = new Date();
+      const registerdate = new Date(value);
+      var validDate = null;
+      if (registerdate < today) {
+        validDate = false;
+      } else [(validDate = true)];
+
+      UpdateValid((prev) => ({
+        ...prev,
+        [name]: validDate,
+      }));
+      if (validDate === true) {
+        UpdateData((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+      }
+    }
+
+    UpdateData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  function SaveFormData({}) {}
-  function ShowFormData({}) {}
   function clearFormData() {
     window.location.reload(true);
   }
 
   return (
-    <div>
-      <Titlemkr
-        showtext="Formulario de registro"
-        tsize="text-[40px]"
-        color1="text-gray-600"
-        fontT="font-bold"
-      />
-      <div className="text-[20px] text-[#54480b] font-extrabold">
-        Nombre
-        <Input
-          name="Name"
-          placeholder="pon tu nombre aquí"
-          onChange={comparedata}
+    <div className="px-[450px] bg-linear-to-r from-[#71cfbe] to-[#1f2a87]">
+      <Form className="w-[600px] block">
+        <Titlemkr
+          showtext="Formulario de registro"
+          tsize="text-[40px]"
+          color1="text-gray-600"
+          fontT="font-bold"
         />
-      </div>
-      <div className="text-[20px] text-[#54480b] font-extrabold">
-        Apellidos
-        <Input
-          placeholder="ingresa tus apellidos aqui"
-          name="LastNames"
-          onChange={comparedata}
-        />
-      </div>
-      <div className="text-[20px] text-[#54480b] font-extrabold">
-        Correo
-        <Input
-          type="email"
-          placeholder="ingresa tu correo aqui"
-          name="Mail"
-          onChange={comparedata}
-        />
-      </div>
-      <div className="text-[20px] text-[#54480b] font-extrabold">
-        Contraseña
-        <Input
-          type="password"
-          placeholder="****"
-          name="Password"
-          onChange={comparedata}
-        />
-      </div>
-      <div className="text-[20px] text-[#54480b] font-extrabold">
-        Edad
-        <Input
-          type="number"
-          placeholder="00"
-          name="Age"
-          onChange={comparedata}
-        />
-      </div>
-      <div className="text-[20px] text-[#54480b] font-extrabold">
-        Género
-        <FormGroup tag="fieldset">
-          <FormGroup check>
-            Masculino
-            <Input
-              type="radio"
-              name="isMale"
-              value="true"
-              onChange={comparedata}
-            ></Input>
+        <div className="text-[20px] text-[#54480b] font-extrabold">
+          Nombre
+          <Input
+            name="Name"
+            placeholder="pon tu nombre aquí"
+            onChange={comparedata}
+            valid={Validinput.Name === true}
+            invalid={Validinput.Name === false}
+          />
+          <FormFeedback invalid>
+            intenta no usar numeros en tu nombre
+          </FormFeedback>
+        </div>
+        <div className="text-[20px] text-[#54480b] font-extrabold">
+          Apellidos
+          <Input
+            placeholder="ingresa tus apellidos aqui"
+            name="LastNames"
+            onChange={comparedata}
+            valid={Validinput.LastNames === true}
+            invalid={Validinput.LastNames === false}
+          />
+          <FormFeedback invalid>
+            intenta no usar numeros en tus apellidos
+          </FormFeedback>
+        </div>
+        <div className="text-[20px] text-[#54480b] font-extrabold">
+          Correo
+          <Input
+            type="email"
+            placeholder="ingresa tu correo aqui"
+            name="Mail"
+            onChange={comparedata}
+            valid={Validinput.Mail === true}
+            invalid={Validinput.Mail === false}
+          />
+          <FormFeedback invalid>
+            intenta usar un formato como micorreo@empresa.com
+          </FormFeedback>
+        </div>
+        <div className="text-[20px] text-[#54480b] font-extrabold">
+          Contraseña
+          <Input
+            type="password"
+            placeholder="****"
+            name="Password"
+            onChange={comparedata}
+          />
+        </div>
+        <div className="text-[20px] text-[#54480b] font-extrabold">
+          Edad
+          <Input
+            type="number"
+            placeholder="00"
+            name="Age"
+            onChange={comparedata}
+            valid={Validinput.Age === true}
+            invalid={Validinput.Age === false}
+          />
+          <FormFeedback invalid>
+            intenta no usar numeros negativos o mayores a 120
+          </FormFeedback>
+        </div>
+        <div className="text-[20px] text-[#54480b] font-extrabold">
+          Género
+          <FormGroup tag="fieldset">
+            <FormGroup check>
+              Masculino
+              <Input
+                type="radio"
+                name="isMale"
+                value="true"
+                onChange={comparedata}
+              ></Input>
+            </FormGroup>
+            <FormGroup check>
+              Femenino
+              <Input
+                type="radio"
+                name="isMale"
+                value="false"
+                onChange={comparedata}
+              ></Input>
+            </FormGroup>
           </FormGroup>
-          <FormGroup check>
-            Femenino
+        </div>
+        <div className="text-[20px] text-[#54480b] font-extrabold">
+          Rol?
+          <Input type="select" name="Role" onChange={comparedata}>
+            <option> no se a que se refiere con rol</option>
+            <option> si se a que se refiere con rol</option>
+            <option> no entiendo a que se refiere con rol</option>
+          </Input>
+        </div>
+        <div className="text-[20px] text-[#54480b] font-extrabold">
+          Opciones
+          <FormGroup>
             <Input
-              type="radio"
-              name="isMale"
-              value="false"
+              type="checkbox"
+              name="Options"
               onChange={comparedata}
-            ></Input>
+              value="op1"
+            />
+            <label>opción 1</label>
+            <Input
+              type="checkbox"
+              name="Options"
+              onChange={comparedata}
+              value="op2"
+            />
+            <label>opción uno</label>
+            <Input
+              type="checkbox"
+              name="Options"
+              onChange={comparedata}
+              value="op3"
+            />
+            <label>opción one</label>
+            <Input
+              type="checkbox"
+              name="Options"
+              onChange={comparedata}
+              value="op4"
+            />
+            <label>opción um</label>
+            <Input
+              type="checkbox"
+              name="Options"
+              onChange={comparedata}
+              value="op5"
+            />
+            <label>opción unu</label>
+            <Input
+              type="checkbox"
+              name="Options"
+              onChange={comparedata}
+              value="op6"
+            />
+            <label>opción eins</label>
+            <Input
+              type="checkbox"
+              name="Options"
+              onChange={comparedata}
+              value="op7"
+            />
+            <label>opción un</label>
+            <Input
+              type="checkbox"
+              name="Options"
+              onChange={comparedata}
+              value="op8"
+            />
+            <label>opción unus</label>
           </FormGroup>
-        </FormGroup>
-      </div>
-      <div className="text-[20px] text-[#54480b] font-extrabold">
-        Rol?
-        <Input type="select" name="Role" onChange={comparedata}>
-          <option> no se a que se refiere con rol</option>
-          <option> si se a que se refiere con rol</option>
-          <option> no entiendo a que se refiere con rol</option>
-        </Input>
-      </div>
-      <div className="text-[20px] text-[#54480b] font-extrabold">
-        Opciones
-        <FormGroup>
+        </div>
+        <div className="text-[20px] text-[#54480b] font-extrabold">
+          Notas / Observaciones
+          <Input type="textarea" name="Notes" onChange={comparedata} />
+        </div>
+        <div className="text-[20px] text-[#54480b] font-extrabold">
+          Fecha{String(Validinput.Date)}
           <Input
-            type="checkbox"
-            name="Options"
+            type="date"
+            name="Date"
             onChange={comparedata}
-            value="op1"
+            valid={Validinput.Date === true}
+            invalid={Validinput.Date === false}
           />
-          <label>opción 1</label>
-          <Input
-            type="checkbox"
-            name="Options"
-            onChange={comparedata}
-            value="op2"
-          />
-          <label>opción uno</label>
-          <Input
-            type="checkbox"
-            name="Options"
-            onChange={comparedata}
-            value="op3"
-          />
-          <label>opción one</label>
-          <Input
-            type="checkbox"
-            name="Options"
-            onChange={comparedata}
-            value="op4"
-          />
-          <label>opción um</label>
-          <Input
-            type="checkbox"
-            name="Options"
-            onChange={comparedata}
-            value="op5"
-          />
-          <label>opción unu</label>
-          <Input
-            type="checkbox"
-            name="Options"
-            onChange={comparedata}
-            value="op6"
-          />
-          <label>opción eins</label>
-          <Input
-            type="checkbox"
-            name="Options"
-            onChange={comparedata}
-            value="op7"
-          />
-          <label>opción un</label>
-          <Input
-            type="checkbox"
-            name="Options"
-            onChange={comparedata}
-            value="op8"
-          />
-          <label>opción unus</label>
-        </FormGroup>
-      </div>
-      <div className="text-[20px] text-[#54480b] font-extrabold">
-        Notas / Observaciones
-        <Input type="textarea" name="Notes" onChange={comparedata} />
-      </div>
-      <div className="text-[20px] text-[#54480b] font-extrabold">
-        Fecha
-        <Input type="date" name="Date" onChange={comparedata} />
-      </div>
-      <div className="buttons"></div>
-      <BotonShowForm FormStructData={FormData}></BotonShowForm>
-      <Button onClick={clearFormData}>Reiniciar Formulario</Button>
+          <FormFeedback invalid>
+            intenta no usar fechas anteriores a las de hoy
+          </FormFeedback>
+        </div>
+
+        <div className="buttons px-[150px]">
+          <BotonShowForm FormStructData={FormData}></BotonShowForm>
+          <Button onClick={clearFormData}>Reiniciar Formulario</Button>
+        </div>
+      </Form>
     </div>
   );
 }
