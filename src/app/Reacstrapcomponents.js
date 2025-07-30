@@ -23,7 +23,11 @@ import "react-multi-carousel/lib/styles.css";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faTrash,
+  faPencil,
+} from "@fortawesome/free-solid-svg-icons";
 
 import oldpage, { Titlemkr } from "./oldpage";
 
@@ -32,8 +36,8 @@ import oldpage, { Titlemkr } from "./oldpage";
 
 //import Registros from "./Registros.json";
 
-export function NewestForm({}) {
-  var [FormData, UpdateData] = useState({
+export function NewestForm() {
+  const IniFormdataData = {
     Name: "",
     LastNames: "",
     Mail: "",
@@ -44,20 +48,20 @@ export function NewestForm({}) {
     Options: "",
     Notes: "",
     Date: "",
-  });
+  };
+
+  var [FormData, UpdateData] = useState(IniFormdataData);
 
   var [Validinput, UpdateValid] = useState({
     Name: null,
     LastNames: null,
     Mail: null,
-    Password: null,
     Age: null,
-    isMale: null,
-    Role: null,
-    Options: null,
-    Notes: null,
     Date: null,
   });
+
+  var [renderTable, EnableTable] = useState(false);
+  var [renderModal, EnableModal] = useState(false);
 
   var comparedata = (e) => {
     const { name, value, type, checked } = e.target;
@@ -150,7 +154,7 @@ export function NewestForm({}) {
         ...prev,
         [name]: validMail,
       }));
-      if (ValidatedMail === true) {
+      if (validMail === true) {
         UpdateData((prev) => ({
           ...prev,
           [name]: value,
@@ -173,11 +177,11 @@ export function NewestForm({}) {
     }
     if (name === "Date") {
       const today = new Date();
-      const registerdate = new Date(value);
-      var validDate = null;
-      if (registerdate < today) {
-        validDate = false;
-      } else [(validDate = true)];
+      today.setHours(0, 0, 0, 0);
+      const registerDate = new Date(value);
+      registerDate.setHours(0, 0, 0, 0);
+
+      var validDate = registerDate >= today;
 
       UpdateValid((prev) => ({
         ...prev,
@@ -218,6 +222,7 @@ export function NewestForm({}) {
             onChange={comparedata}
             valid={Validinput.Name === true}
             invalid={Validinput.Name === false}
+            value={FormData.Name}
           />
           <FormFeedback invalid>
             intenta no usar numeros en tu nombre
@@ -302,67 +307,84 @@ export function NewestForm({}) {
             <option> no se a que se refiere con rol</option>
             <option> si se a que se refiere con rol</option>
             <option> no entiendo a que se refiere con rol</option>
+            <option> de canéla porfavor</option>
           </Input>
         </div>
         <div className="text-[20px] text-[#54480b] font-extrabold">
           Opciones
           <FormGroup>
-            <Input
-              type="checkbox"
-              name="Options"
-              onChange={comparedata}
-              value="op1"
-            />
-            <label>opción 1</label>
-            <Input
-              type="checkbox"
-              name="Options"
-              onChange={comparedata}
-              value="op2"
-            />
-            <label>opción uno</label>
-            <Input
-              type="checkbox"
-              name="Options"
-              onChange={comparedata}
-              value="op3"
-            />
-            <label>opción one</label>
-            <Input
-              type="checkbox"
-              name="Options"
-              onChange={comparedata}
-              value="op4"
-            />
-            <label>opción um</label>
-            <Input
-              type="checkbox"
-              name="Options"
-              onChange={comparedata}
-              value="op5"
-            />
-            <label>opción unu</label>
-            <Input
-              type="checkbox"
-              name="Options"
-              onChange={comparedata}
-              value="op6"
-            />
-            <label>opción eins</label>
-            <Input
-              type="checkbox"
-              name="Options"
-              onChange={comparedata}
-              value="op7"
-            />
-            <label>opción un</label>
-            <Input
-              type="checkbox"
-              name="Options"
-              onChange={comparedata}
-              value="op8"
-            />
-            <label>opción unus</label>
+            <div>
+              <Input
+                type="checkbox"
+                name="Options"
+                onChange={comparedata}
+                value="op1"
+              />
+              <label>opción 1</label>
+            </div>
+            <div>
+              <Input
+                type="checkbox"
+                name="Options"
+                onChange={comparedata}
+                value="op2"
+              />
+              <label>opción uno</label>
+            </div>
+            <div>
+              <Input
+                type="checkbox"
+                name="Options"
+                onChange={comparedata}
+                value="op3"
+              />
+              <label>opción one</label>
+            </div>
+            <div>
+              <Input
+                type="checkbox"
+                name="Options"
+                onChange={comparedata}
+                value="op4"
+              />
+              <label>opción um</label>
+            </div>
+            <div>
+              <Input
+                type="checkbox"
+                name="Options"
+                onChange={comparedata}
+                value="op5"
+              />
+              <label>opción unu</label>
+            </div>
+            <div>
+              <Input
+                type="checkbox"
+                name="Options"
+                onChange={comparedata}
+                value="op6"
+              />
+              <label>opción eins</label>
+            </div>
+            <div>
+              <Input
+                type="checkbox"
+                name="Options"
+                onChange={comparedata}
+                value="op7"
+              />
+              <label>opción un</label>
+            </div>
+            <div>
+              <Input
+                type="checkbox"
+                name="Options"
+                onChange={comparedata}
+                value="op8"
+              />
+              <label>opción unus</label>
+            </div>
           </FormGroup>
         </div>
         <div className="text-[20px] text-[#54480b] font-extrabold">
@@ -386,8 +408,104 @@ export function NewestForm({}) {
         <div className="buttons px-[150px]">
           <BotonShowForm FormStructData={FormData}></BotonShowForm>
           <Button onClick={clearFormData}>Reiniciar Formulario</Button>
+          <Button onClick={() => EnableTable(true)}> Guardar</Button>
         </div>
       </Form>
+      {renderTable && (
+        <div className="px-[-500px]">
+          {" "}
+          <Table bordered={true} className="w-[600px] block px-[-500px]">
+            <thead>
+              <tr>
+                <th>Registro</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {Object.entries(FormData).map(([key, value], index) => (
+                  <td key={index}> {String(key)}</td>
+                ))}
+                <td>Actions</td>
+              </tr>
+              <tr>
+                {Object.entries(FormData).map(([key, value], index) => (
+                  <td key={index}> {String(value)}</td>
+                ))}
+                <td>
+                  <Button onClick={() => UpdateData(IniFormdataData)}>
+                    {" "}
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      className="text-[#c90000] "
+                    ></FontAwesomeIcon>{" "}
+                  </Button>
+                  <Button onClick={() => EnableModal(true)}>
+                    {" "}
+                    <FontAwesomeIcon
+                      icon={faPencil}
+                      className="text-[#00c98d] "
+                    ></FontAwesomeIcon>{" "}
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </div>
+      )}{" "}
+      {renderModal && (
+        <div
+          style={{
+            display: "block",
+            width: 700,
+            padding: 30,
+            backgroundColor: "blue",
+          }}
+        >
+          <Modal
+            isOpen={renderModal}
+            modalTransition={{ timeout: 2000 }}
+            className="bg-blue-200"
+          >
+            <ModalBody className="bg-blue-300">
+              <Table bordered={true} className="w-[600px] block px-[-500px]">
+                <thead>
+                  <tr>
+                    <th>Registro</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    {Object.entries(FormData).map(([key, value], index) => (
+                      <td key={index}> {String(key)}</td>
+                    ))}
+                  </tr>
+                  <tr>
+                    {Object.entries(FormData).map(([key, value], index) => (
+                      <td key={index}>
+                        <Input
+                          name={String(key)}
+                          onChange={comparedata}
+                          value={String(value)}
+                        />
+                      </td>
+                    ))}
+                    <td></td>
+                  </tr>
+                </tbody>
+              </Table>
+            </ModalBody>
+            <ModalFooter className="bg-[#494bca]">
+              <button
+                onClick={() => EnableModal(false)}
+                className="bg-[#b69191]"
+              >
+                Cerrar y Aceptar
+              </button>
+            </ModalFooter>
+          </Modal>
+        </div>
+      )}
     </div>
   );
 }
