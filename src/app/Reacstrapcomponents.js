@@ -46,25 +46,29 @@ export function APICard() {
   var [Consulted, ShowConsult] = useState(false);
   const [ProductPlacements, searchProducts] = useState([]);
   const [UserPlacements, searchUsers] = useState([]);
-  var [usefectworks, testingusfc] = useState("... ");
+
+  var [randseed, setseed] = useState(0);
 
   useEffect(() => {
-    testingusfc("this shit works but ...");
     if (Consulted) {
-      fetch("https://fakestoreapi.com/products")
-        .then((response) => response.json())
-        .then((data) => {
-          searchProducts(data);
-          console.log(data);
-        })
-        .catch((error) =>
-          console.error("Error fetching data , no jaló la api =p:", error)
-        );
       fetch("https://fakestoreapi.com/users")
         .then((response) => response.json())
         .then((data) => {
           searchUsers(data);
           console.log(data);
+        })
+        .catch((error) =>
+          console.error("Error fetching data , no jaló la api =p:", error)
+        );
+
+      fetch("https://fakestoreapi.com/products")
+        .then((response) => response.json())
+        .then((data) => {
+          searchProducts(data);
+          console.log(data);
+          const maxStart = Math.max(0, data.length - 15);
+          const randomIndex = Math.floor(Math.random() * maxStart);
+          setseed(randomIndex);
         })
         .catch((error) =>
           console.error("Error fetching data , no jaló la api =p:", error)
@@ -80,26 +84,93 @@ export function APICard() {
       </Button>
       {Consulted && (
         <div>
-          {UserPlacements.map((users) => (
-            <Card key={users.id} style={{ width: "15rem" }}>
+          {
+            UserPlacements.slice(0, 1).map((users) => (
+              <Card key={users.id} style={{ width: "15rem" }}>
+                <CardBody>
+                  <CardTitle tag="h5">
+                    {" "}
+                    {users.name.firstname}
+                    {users.name.lastname}{" "}
+                  </CardTitle>
+                  <CardText>
+                    <br></br>
+                    <strong>Username:</strong> {users.username}
+                    <br></br>
+                    <strong>Email:</strong> {users.email}
+                    <br></br>
+                    <strong>Phone:</strong> {users.phone}
+                  </CardText>
+                  <CardFooter>
+                    City: {users.address.city},{users.address.street} #
+                    {users.address.number}
+                  </CardFooter>
+                </CardBody>
+              </Card>
+            ))
+
+            /*<Card key={UserPlacements[0].id} style={{ width: "15rem" }}>
               <CardBody>
                 <CardTitle tag="h5">
                   {" "}
-                  {users.name.firstname}
-                  {users.name.lastname}{" "}
+                  {UserPlacements[0].name.firstname}
+                  {UserPlacements[0].name.lastname}{" "}
                 </CardTitle>
                 <CardText>
-                  <strong>Username:</strong> {users.username}
-                  <strong>Email:</strong> {users.email}
-                  <strong>Phone:</strong> {users.phone}
+                  <strong>Username:</strong> {UserPlacements[0].username}
+                  <br></br>
+                  <strong>Email:</strong> {UserPlacements[0].email}
+                  <br></br>
+                  <strong>Phone:</strong> {UserPlacements[0].phone}
                 </CardText>
                 <CardFooter>
-                  City: {users.address.city},{users.address.street} #
-                  {users.address.number}
+                  City: {UserPlacements[0].address.city},
+                  {UserPlacements[0].address.street} #
+                  {UserPlacements[0].address.number}
                 </CardFooter>
               </CardBody>
             </Card>
-          ))}
+
+            */
+          }
+          {Consulted && (
+            <div>
+              <Table bordered={true} className="w-[600px] block">
+                <thead>
+                  <tr>
+                    <th>Productos</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>id</td>
+                    <td>item</td>
+                    <td>price</td>
+                    <td>description</td>
+                    <td>category</td>
+                    <td>rating rate</td>
+                    <td>rating count</td>
+                  </tr>
+                  {ProductPlacements.slice(randseed, randseed + 15).map(
+                    (item, index) => (
+                      <tr key={index}>
+                        <td>
+                          <img src={item.image} alt={item.title} height="50" />
+                        </td>
+                        <td>{item.id}</td>
+                        <td>${item.price}</td>
+                        <td>{item.description}</td>
+                        <td>{item.category}</td>
+                        <td>{item.rating?.rate}</td>
+                        <td>{item.rating?.count}</td>
+                      </tr>
+                    )
+                  )}
+                </tbody>
+              </Table>
+            </div>
+          )}
         </div>
       )}
     </div>
