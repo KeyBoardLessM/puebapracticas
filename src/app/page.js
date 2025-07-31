@@ -5,6 +5,7 @@ import Reacstrapcomponents, {
   BotonTostada,
   MyForm,
   NewestForm,
+  APICard,
 } from "./Reacstrapcomponents.js";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -13,7 +14,7 @@ export default function Home() {
   return (
     <main>
       <div>
-        <NewestForm></NewestForm>
+        <APICard></APICard>
       </div>
     </main>
   );

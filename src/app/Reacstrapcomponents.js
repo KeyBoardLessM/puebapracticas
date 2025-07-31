@@ -1,7 +1,7 @@
 "Use Client";
 
 import React, { use } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -17,6 +17,12 @@ import {
   FormGroup,
   FormFeedback,
   Form,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  CardText,
+  CardFooter,
 } from "reactstrap";
 
 import "react-multi-carousel/lib/styles.css";
@@ -35,6 +41,70 @@ import oldpage, { Titlemkr } from "./oldpage";
 //import { readFile, writeFile } from "fs/promises";
 
 //import Registros from "./Registros.json";
+
+export function APICard() {
+  var [Consulted, ShowConsult] = useState(false);
+  const [ProductPlacements, searchProducts] = useState([]);
+  const [UserPlacements, searchUsers] = useState([]);
+  var [usefectworks, testingusfc] = useState("... ");
+
+  useEffect(() => {
+    testingusfc("this shit works but ...");
+    if (Consulted) {
+      fetch("https://fakestoreapi.com/products")
+        .then((response) => response.json())
+        .then((data) => {
+          searchProducts(data);
+          console.log(data);
+        })
+        .catch((error) =>
+          console.error("Error fetching data , no jaló la api =p:", error)
+        );
+      fetch("https://fakestoreapi.com/users")
+        .then((response) => response.json())
+        .then((data) => {
+          searchUsers(data);
+          console.log(data);
+        })
+        .catch((error) =>
+          console.error("Error fetching data , no jaló la api =p:", error)
+        );
+    }
+  }, [Consulted]);
+
+  return (
+    <div className="px-[300px] bg-radial from-[#71b4cf] to-[#79ff79]">
+      <Button onClick={() => ShowConsult(!Consulted)}>
+        {" "}
+        realizar/cerrar consulta
+      </Button>
+      {Consulted && (
+        <div>
+          {UserPlacements.map((users) => (
+            <Card key={users.id} style={{ width: "15rem" }}>
+              <CardBody>
+                <CardTitle tag="h5">
+                  {" "}
+                  {users.name.firstname}
+                  {users.name.lastname}{" "}
+                </CardTitle>
+                <CardText>
+                  <strong>Username:</strong> {users.username}
+                  <strong>Email:</strong> {users.email}
+                  <strong>Phone:</strong> {users.phone}
+                </CardText>
+                <CardFooter>
+                  City: {users.address.city},{users.address.street} #
+                  {users.address.number}
+                </CardFooter>
+              </CardBody>
+            </Card>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function NewestForm() {
   const IniFormdataData = {
@@ -456,7 +526,7 @@ export function NewestForm() {
         <div
           style={{
             display: "block",
-            width: 700,
+            width: 1000,
             padding: 30,
             backgroundColor: "blue",
           }}
